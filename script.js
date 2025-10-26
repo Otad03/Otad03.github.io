@@ -392,3 +392,258 @@ function typeWriter(element, text, speed = 100) {
   }
   type();
 }
+
+
+// ========================================
+// EASTER EGGS
+// ========================================
+
+// Easter Egg 1: Type "secret" anywhere on the page
+let typedSequence = '';
+const secretCode = 'secret';
+
+document.addEventListener('keypress', (e) => {
+  typedSequence += e.key.toLowerCase();
+  
+  // Keep only last 10 characters
+  if (typedSequence.length > 10) {
+    typedSequence = typedSequence.slice(-10);
+  }
+  
+  // Check if secret code is typed
+  if (typedSequence.includes(secretCode)) {
+    showEasterEgg('🎉 Secret Code!', 'You found the hidden message! You are awesome! 🌟');
+    typedSequence = ''; // Reset
+    createFireworks();
+  }
+});
+
+// Easter Egg 2: Konami Code (↑↑↓↓←→←→BA)
+const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
+
+document.addEventListener('keydown', (e) => {
+  if (e.key.toLowerCase() === konamiCode[konamiIndex].toLowerCase()) {
+    konamiIndex++;
+    
+    if (konamiIndex === konamiCode.length) {
+      showEasterEgg('🎮 KONAMI CODE!', 'You are a true gamer! Here\'s 30 extra lives! 🕹️');
+      konamiIndex = 0;
+      activateKonamiMode();
+    }
+  } else {
+    konamiIndex = 0;
+  }
+});
+
+// Easter Egg 3: Click logo 5 times fast
+let logoClicks = 0;
+let logoClickTimer;
+
+document.getElementById('navLogo').addEventListener('click', () => {
+  logoClicks++;
+  
+  clearTimeout(logoClickTimer);
+  
+  if (logoClicks === 5) {
+    showEasterEgg('🏆 Achievement Unlocked!', 'Speed Clicker! You clicked the logo 5 times! 🖱️');
+    logoClicks = 0;
+    showAchievementToast('🏆 Achievement: Speed Clicker!');
+  }
+  
+  logoClickTimer = setTimeout(() => {
+    logoClicks = 0;
+  }, 2000);
+});
+
+// Easter Egg 4: Hold Shift + Click on profile image
+const profileImage = document.querySelector('.profile-img, .placeholder-img');
+if (profileImage) {
+  profileImage.addEventListener('click', (e) => {
+    if (e.shiftKey) {
+      showEasterEgg('👤 Secret Profile!', 'Psst... I love pizza and coffee! ☕🍕');
+      createFloatingEmojis(['🍕', '☕', '🎨', '💻', '🎮']);
+    }
+  });
+}
+
+// Easter Egg 5: Type "dance" to make everything dance
+document.addEventListener('keypress', (e) => {
+  if (typedSequence.includes('dance')) {
+    document.body.style.animation = 'crazyShake 0.5s infinite';
+    showAchievementToast('🕺 Dance Party Mode!');
+    
+    setTimeout(() => {
+      document.body.style.animation = '';
+    }, 5000);
+    
+    typedSequence = '';
+  }
+});
+
+// Show Easter Egg Popup
+function showEasterEgg(title, message) {
+  // Create overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'easter-egg-overlay';
+  
+  // Create popup
+  const popup = document.createElement('div');
+  popup.className = 'easter-egg-popup';
+  popup.innerHTML = `
+    <h2>${title}</h2>
+    <p>${message}</p>
+    <button onclick="this.parentElement.remove(); document.querySelector('.easter-egg-overlay').remove()">
+      Awesome! ✨
+    </button>
+  `;
+  
+  document.body.appendChild(overlay);
+  document.body.appendChild(popup);
+  
+  // Click overlay to close
+  overlay.addEventListener('click', () => {
+    overlay.remove();
+    popup.remove();
+  });
+}
+
+// Show Achievement Toast
+function showAchievementToast(message) {
+  const toast = document.createElement('div');
+  toast.className = 'achievement-toast';
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.style.animation = 'slideInDown 0.5s ease forwards';
+    setTimeout(() => toast.remove(), 500);
+  }, 3000);
+}
+
+// Konami Mode Effect
+function activateKonamiMode() {
+  for (let i = 0; i < 30; i++) {
+    setTimeout(() => {
+      const star = document.createElement('div');
+      star.className = 'konami-star';
+      star.textContent = '⭐';
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      star.style.top = window.innerHeight + 'px';
+      document.body.appendChild(star);
+      
+      setTimeout(() => star.remove(), 2000);
+    }, i * 100);
+  }
+}
+
+// Fireworks Effect
+function createFireworks() {
+  for (let i = 0; i < 20; i++) {
+    setTimeout(() => {
+      const firework = document.createElement('div');
+      firework.textContent = '✨';
+      firework.style.cssText = `
+        position: fixed;
+        left: ${Math.random() * window.innerWidth}px;
+        top: ${Math.random() * window.innerHeight}px;
+        font-size: 2rem;
+        pointer-events: none;
+        z-index: 9999;
+        animation: fireworkBurst 1s ease-out forwards;
+      `;
+      document.body.appendChild(firework);
+      setTimeout(() => firework.remove(), 1000);
+    }, i * 100);
+  }
+}
+
+// Add firework animation
+const fireworkStyle = document.createElement('style');
+fireworkStyle.textContent = `
+  @keyframes fireworkBurst {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(3);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes slideInDown {
+    to {
+      transform: translateY(200px);
+      opacity: 0;
+    }
+  }
+`;
+document.head.appendChild(fireworkStyle);
+
+// Floating Emojis
+function createFloatingEmojis(emojis) {
+  for (let i = 0; i < 15; i++) {
+    setTimeout(() => {
+      const emoji = document.createElement('div');
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.cssText = `
+        position: fixed;
+        left: ${Math.random() * window.innerWidth}px;
+        top: window.innerHeight + 20px;
+        font-size: 2rem;
+        pointer-events: none;
+        z-index: 9999;
+        animation: floatUp 3s ease-out forwards;
+      `;
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 3000);
+    }, i * 150);
+  }
+}
+
+const floatStyle = document.createElement('style');
+floatStyle.textContent = `
+  @keyframes floatUp {
+    to {
+      transform: translateY(-120vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+`;
+// ========================================
+// VISITOR COUNTER
+// ========================================
+function initializeVisitorCounter() {
+  let visits = localStorage.getItem('portfolioVisits');
+  
+  if (!visits) {
+    visits = 1;
+  } else {
+    visits = parseInt(visits) + 1;
+  }
+  
+  localStorage.setItem('portfolioVisits', visits);
+  animateCounter(visits);
+}
+
+function animateCounter(target) {
+  const counterElement = document.getElementById('visitorCount');
+  let current = 0;
+  const increment = target / 50;
+  const duration = 1000;
+  const stepTime = duration / 50;
+  
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      counterElement.textContent = target;
+      clearInterval(timer);
+    } else {
+      counterElement.textContent = Math.floor(current);
+    }
+  }, stepTime);
+}
+
+// Initialize visitor counter
+initializeVisitorCounter();

@@ -726,3 +726,148 @@ footer p {
     opacity: 0;
   }
 }
+/* Easter Egg Styles */
+.easter-egg-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  z-index: 10000;
+  text-align: center;
+  color: white;
+  animation: popIn 0.5s ease forwards;
+  max-width: 90%;
+}
+
+@keyframes popIn {
+  to {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.easter-egg-popup h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  animation: rainbowText 2s infinite;
+}
+
+.easter-egg-popup p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.easter-egg-popup button {
+  background: white;
+  color: #667eea;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.easter-egg-popup button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(255,255,255,0.3);
+}
+
+@keyframes rainbowText {
+  0% { color: #ff0000; }
+  16% { color: #ff7f00; }
+  33% { color: #ffff00; }
+  50% { color: #00ff00; }
+  66% { color: #0000ff; }
+  83% { color: #8b00ff; }
+  100% { color: #ff0000; }
+}
+
+.easter-egg-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Secret Achievement Badge */
+.achievement-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 10000;
+  animation: slideInUp 0.5s ease;
+  font-weight: 600;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Konami Code Stars */
+.konami-star {
+  position: fixed;
+  font-size: 2rem;
+  pointer-events: none;
+  z-index: 9999;
+  animation: starFloat 2s ease-out forwards;
+}
+
+@keyframes starFloat {
+  to {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+/* Visitor Counter */
+.visitor-counter {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  background: var(--bg-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  animation: slideInRight 0.5s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
