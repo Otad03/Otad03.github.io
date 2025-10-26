@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SYSTEM HACKED</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      overflow: hidden;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Matrix Rain Background */
+    .matrix-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .matrix-column {
+      position: absolute;
+      color: #00ff00;
+      font-size: 14px;
+      white-space: pre;
+      animation: fall linear infinite;
+      text-shadow: 0 0 5px #00ff00;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100%);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0.3;
+      }
+    }
+
+    /* Main Content */
+    .hack-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      animation: glitchScreen 0.3s infinite;
+    }
+
+    @keyframes glitchScreen {
+      0% {
+        filter: hue-rotate(0deg);
+        transform: translate(0);
+      }
+      20% {
+        filter: hue-rotate(90deg);
+        transform: translate(-5px, 5px);
+      }
+      40% {
+        filter: hue-rotate(180deg);
+        transform: translate(-5px, -5px);
+      }
+      60% {
+        filter: hue-rotate(270deg);
+        transform: translate(5px, 5px);
+      }
+      80% {
+        filter: hue-rotate(360deg);
+        transform: translate(5px, -5px);
+      }
+      100% {
+        filter: hue-rotate(0deg);
+        transform: translate(0);
+      }
+    }
+
+    .hack-text {
+      color: #00ff00;
+      font-size: 3rem;
+      text-align: center;
+      text-shadow: 0 0 20px #00ff00;
+      animation: glitchText 0.5s infinite;
+      margin-bottom: 3rem;
+      font-weight: bold;
+    }
+
+    @keyframes glitchText {
+      0% {
+        text-shadow: 0 0 10px #00ff00;
+      }
+      25% {
+        text-shadow: -3px 0 10px #ff0000, 3px 0 10px #0000ff;
+      }
+      50% {
+        text-shadow: 3px 0 10px #ff0000, -3px 0 10px #0000ff;
+      }
+      75% {
+        text-shadow: 0 3px 10px #ff0000, 0 -3px 10px #0000ff;
+      }
+      100% {
+        text-shadow: 0 0 10px #00ff00;
+      }
+    }
+
+    .hack-terminal {
+      background: rgba(0, 0, 0, 0.9);
+      border: 2px solid #00ff00;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 700px;
+      color: #00ff00;
+      box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+      margin-bottom: 2rem;
+    }
+
+    .terminal-line {
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeInLine 0.3s forwards;
+      font-size: 1.1rem;
+    }
+
+    @keyframes fadeInLine {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 20px;
+      background: #00ff00;
+      animation: blink 0.7s infinite;
+      vertical-align: middle;
+      margin-left: 5px;
+    }
+
+    @keyframes blink {
+      0%, 49% {
+        opacity: 1;
+      }
+      50%, 100% {
+        opacity: 0;
+      }
+    }
+
+    .hack-warning {
+      color: #ff0000;
+      font-size: 1.8rem;
+      font-weight: bold;
+      animation: warning 1s infinite;
+      margin: 2rem 0;
+      text-align: center;
+      text-shadow: 0 0 10px #ff0000;
+    }
+
+    @keyframes warning {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.5;
+        transform: scale(1.1);
+      }
+    }
+
+    .hack-close-btn {
+      background: #ff0000;
+      color: white;
+      border: 2px solid #00ff00;
+      padding: 1rem 2rem;
+      font-family: 'Courier New', monospace;
+      font-size: 1.3rem;
+      cursor: pointer;
+      border-radius: 5px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+      transition: all 0.3s;
+      font-weight: bold;
+    }
+
+    .hack-close-btn:hover {
+      background: #00ff00;
+      color: #000;
+      border-color: #ff0000;
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
+    }
+
+    .skull {
+      font-size: 5rem;
+      animation: skullSpin 2s infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes skullSpin {
+      0%, 100% {
+        transform: rotate(0deg);
+      }
+      50% {
+        transform: rotate(180deg);
+      }
+    }
+
+    /* Loading Bar */
+    .loading-bar {
+      width: 100%;
+      height: 30px;
+      background: #001a00;
+      border: 1px solid #00ff00;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .loading-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00ff00, #00aa00);
+      width: 0%;
+      animation: loading 3s ease-in-out forwards;
+      box-shadow: 0 0 10px #00ff00;
+    }
+
+    @keyframes loading {
+      to {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hack-text {
+        font-size: 2rem;
+      }
+      .hack-warning {
+        font-size: 1.2rem;
+      }
+      .terminal-line {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Matrix Rain Background -->
+  <div class="matrix-rain" id="matrixRain"></div>
+
+  <!-- Main Hack Content -->
+  <div class="hack-container">
+    <div class="skull">💀</div>
+    <div class="hack-text">SYSTEM COMPROMISED</div>
+    
+    <div class="hack-terminal" id="terminal">
+      <!-- Lines will be added by JavaScript -->
+    </div>
+
+    <div class="hack-warning" id="warning" style="display: none;">
+      ⚠️ WARNING: ALL YOUR DATA HAS BEEN STOLEN ⚠️
+    </div>
+
+    <button class="hack-close-btn" id="closeBtn" style="display: none;">
+      [ESC] RETURN TO SAFETY
+    </button>
+  </div>
+
+  <script>
+    // Matrix Rain Effect
+    function startMatrixRain() {
+      const matrixContainer = document.getElementById('matrixRain');
+      const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+      
+      setInterval(() => {
+        if (document.querySelectorAll('.matrix-column').length < 100) {
+          const column = document.createElement('div');
+          column.className = 'matrix-column';
+          column.style.left = Math.random() * window.innerWidth + 'px';
+          column.style.animationDuration = (Math.random() * 3 + 2) + 's';
+          
+          let text = '';
+          for (let i = 0; i < 30; i++) {
+            text += chars.charAt(Math.floor(Math.random() * chars.length)) + '\n';
+          }
+          column.textContent = text;
+          
+          matrixContainer.appendChild(column);
+          
+          setTimeout(() => column.remove(), 5000);
+        }
+      }, 100);
+    }
+
+    // Terminal Animation
+    function startTerminalAnimation() {
+      const terminal = document.getElementById('terminal');
+      const hackMessages = [
+        '> Initializing hack sequence...',
+        '> Bypassing firewall... [OK]',
+        '> Accessing mainframe... [OK]',
+        '> Extracting confidential data... [OK]',
+        '> Downloading files... <div class="loading-bar"><div class="loading-fill"></div></div>',
+        '> Deploying malware... [OK]',
+        '> Stealing cookies and passwords... [OK]',
+        '> Compromising security system... [OK]',
+        '> Erasing digital footprints... [OK]',
+        '> HACK COMPLETE!'
+      ];
+
+      hackMessages.forEach((msg, index) => {
+        setTimeout(() => {
+          const line = document.createElement('div');
+          line.className = 'terminal-line';
+          line.innerHTML = msg;
+          line.style.animationDelay = `${index * 0.1}s`;
+          terminal.appendChild(line);
+
+          // Play beep sound
+          playBeep();
+
+          // Add cursor on last line
+          if (index === hackMessages.length - 1) {
+            setTimeout(() => {
+              const cursor = document.createElement('span');
+              cursor.className = 'cursor';
+              line.appendChild(cursor);
+
+              // Show warning and button
+              setTimeout(() => {
+                document.getElementById('warning').style.display = 'block';
+                document.getElementById('closeBtn').style.display = 'block';
+              }, 500);
+            }, 300);
+          }
+        }, index * 600);
+      });
+    }
+
+    // Beep sound effect
+    function playBeep() {
+      const audioContext = window.AudioContext || window.webkitAudioContext;
+      if (audioContext) {
+        const context = new audioContext();
+        const oscillator = context.createOscillator();
+        const gainNode = context.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(context.destination);
+
+        oscillator.frequency.value = 800;
+        oscillator.type = 'square';
+
+        gainNode.gain.setValueAtTime(0.1, context.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 0.05);
+
+        oscillator.start(context.currentTime);
+        oscillator.stop(context.currentTime + 0.05);
+      }
+    }
+
+    // Close button
+    document.getElementById('closeBtn').addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+
+    // ESC key to exit
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        window.location.href = 'index.html';
+      }
+    });
+
+    // Start effects
+    startMatrixRain();
+    startTerminalAnimation();
+  </script>
+</body>
+</html>

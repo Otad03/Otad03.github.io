@@ -647,3 +647,17 @@ function animateCounter(target) {
 
 // Initialize visitor counter
 initializeVisitorCounter();
+// ========================================
+// HACK MODE - Redirect to separate page
+// ========================================
+function initializeHackMode() {
+  const hackBtn = document.getElementById('hackBtn');
+  
+  hackBtn.addEventListener('click', () => {
+    // Redirect to hacked page
+    window.location.href = 'hacked.html';
+  });
+}
+
+// Initialize hack mode
+initializeHackMode();
