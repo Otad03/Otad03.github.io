@@ -266,3 +266,139 @@ function observeElements() {
 
 // Initialize animations after content loads
 setTimeout(observeElements, 500);
+// Crazy Mode Button
+function initializeCrazyMode() {
+  const crazyBtn = document.getElementById('crazyBtn');
+  let isCrazy = false;
+  let confettiInterval;
+  
+  crazyBtn.addEventListener('click', () => {
+    isCrazy = !isCrazy;
+    
+    if (isCrazy) {
+      // Activate crazy mode
+      document.body.classList.add('crazy-mode');
+      crazyBtn.textContent = '😵';
+      crazyBtn.style.animation = 'crazySpin 0.5s infinite';
+      
+      // Play confetti
+      confettiInterval = setInterval(createConfetti, 100);
+      
+      // Random alerts
+      setTimeout(() => {
+        if (isCrazy) alert('🎉 PARTY MODE ACTIVATED! 🎉');
+      }, 500);
+      
+      // Make cursor trails
+      document.addEventListener('mousemove', cursorTrail);
+      
+      // Random emoji explosions
+      startEmojiExplosions();
+      
+    } else {
+      // Deactivate crazy mode
+      document.body.classList.remove('crazy-mode');
+      crazyBtn.textContent = '🎉';
+      crazyBtn.style.animation = '';
+      clearInterval(confettiInterval);
+      document.removeEventListener('mousemove', cursorTrail);
+      stopEmojiExplosions();
+      
+      // Remove all confetti
+      document.querySelectorAll('.confetti, .cursor-trail, .emoji-explosion').forEach(el => el.remove());
+    }
+  });
+}
+
+// Confetti Effect
+function createConfetti() {
+  const confetti = document.createElement('div');
+  confetti.className = 'confetti';
+  confetti.style.left = Math.random() * window.innerWidth + 'px';
+  confetti.style.top = '-10px';
+  confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+  confetti.style.width = Math.random() * 10 + 5 + 'px';
+  confetti.style.height = Math.random() * 10 + 5 + 'px';
+  document.body.appendChild(confetti);
+  
+  setTimeout(() => confetti.remove(), 3000);
+}
+
+// Cursor Trail
+function cursorTrail(e) {
+  const trail = document.createElement('div');
+  trail.className = 'cursor-trail';
+  trail.style.cssText = `
+    position: fixed;
+    left: ${e.clientX}px;
+    top: ${e.clientY}px;
+    width: 10px;
+    height: 10px;
+    background: hsl(${Math.random() * 360}, 100%, 50%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    animation: confettiFall 1s linear forwards;
+  `;
+  document.body.appendChild(trail);
+  setTimeout(() => trail.remove(), 1000);
+}
+
+// Emoji Explosions
+let emojiInterval;
+function startEmojiExplosions() {
+  const emojis = ['🎉', '🎊', '✨', '⭐', '💥', '🔥', '🌈', '🦄', '🎈', '🎆'];
+  
+  emojiInterval = setInterval(() => {
+    const emoji = document.createElement('div');
+    emoji.className = 'emoji-explosion';
+    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    emoji.style.cssText = `
+      position: fixed;
+      left: ${Math.random() * window.innerWidth}px;
+      top: ${Math.random() * window.innerHeight}px;
+      font-size: ${Math.random() * 40 + 20}px;
+      pointer-events: none;
+      z-index: 9999;
+      animation: emojiPop 1s ease-out forwards;
+    `;
+    document.body.appendChild(emoji);
+    setTimeout(() => emoji.remove(), 1000);
+  }, 300);
+}
+
+function stopEmojiExplosions() {
+  clearInterval(emojiInterval);
+}
+
+// Add emoji pop animation to CSS (add this to the CSS section above)
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes emojiPop {
+    0% {
+      transform: scale(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(2) rotate(360deg);
+      opacity: 0;
+    }
+  }
+`;
+document.head.appendChild(style);
+
+// Initialize crazy mode when page loads
+initializeCrazyMode();
+// Add to script.js
+function typeWriter(element, text, speed = 100) {
+  let i = 0;
+  element.textContent = '';
+  function type() {
+    if (i < text.length) {
+      element.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+  type();
+}
