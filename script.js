@@ -227,21 +227,11 @@ function initializeContactForm() {
     const name = form.querySelector('input[type="text"]').value;
     const email = form.querySelector('input[type="email"]').value;
     const message = form.querySelector('textarea').value;
-    
-    // Here you can add your email service integration
-    // For now, we'll just show a success message
     alert(`Thank you for your message, ${name}! I'll get back to you soon.`);
     
     // Reset form
     form.reset();
     
-    // Optional: Send to email service like EmailJS, Formspree, etc.
-    // Example with EmailJS:
-    // emailjs.send("service_id", "template_id", {
-    //   from_name: name,
-    //   from_email: email,
-    //   message: message
-    // });
   });
 }
 

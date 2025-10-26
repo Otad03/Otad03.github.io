@@ -14,12 +14,14 @@ const portfolioConfig = {
     email: "gamboajeiel56@gmail.com",
     email: "otadgamboa@gmail.com",
     facebook: "https://www.facebook.com/jeiel.encomiendagamboa",
+    instagram: "https://www.instagram.com/otad03/",
+
 
   },
   
   // ABOUT SECTION
   about: {
-    title: "Who I Am",
+    title: "Who Am I",
     description: "I’m a Cybersecurity student with a strong interest in networking, penetration testing, and information security. I enjoy learning how systems work, identifying vulnerabilities, and finding ways to strengthen defenses.",
     additionalInfo: "My goal is to build a solid foundation in cybersecurity and become a skilled ethical hacker who helps protect and secure digital environments."
   },
@@ -95,7 +97,7 @@ skills: [
       title: "Set up Home Network",
       description: "A home network, complete with a router, a switch, an access point router,and a homelab.",
       image: "",
-      technologies: [],
+      technologies: ["Switch","Router","Home lab(Old Laptop)",],
       liveLink: "",
       githubLink: ""
     }
